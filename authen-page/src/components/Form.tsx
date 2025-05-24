@@ -36,8 +36,8 @@ const Form: React.FC = () => {
     };
 
     return (
-        <div className="bg-[#0e387a] h-screen mx-auto">
-            <h1 className='text-center text-3xl text-[#9fafca] hover:text-[#b8df10] font-extrabold pt-10 pb-10'>
+        <div className="bg-[#222831] h-screen mx-auto">
+            <h1 className='text-center text-4xl text-[#9fafca] hover:text-[#b8df10] font-extrabold pt-10 pb-10'>
                 Sign In Form
             </h1>
             {error ? (
@@ -47,22 +47,22 @@ const Form: React.FC = () => {
             )}
             <form className="max-w-sm mx-auto w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col pt-10">
-                    <label htmlFor="email" className="text-white">Email</label>
+                    <label htmlFor="email" className="pb-3 text-white">Email</label>
                     <input
                         type="email"
                         id="email"
-                        className="border-none mb-3 rounded-md p-2"
+                        className="bg-[#393E46] border-none mb-3 rounded-md p-2"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                         value={email}
                         required
                     />
 
-                    <label htmlFor="password" className="text-white">Password</label>
+                    <label htmlFor="password" className="pb-3 text-white">Password</label>
                     <div className="relative">
                         <input
                             type={showPassword ? "text" : "password"}
                             id="password"
-                            className="rounded-md border-none pr-12 p-2 w-full"
+                            className="bg-[#393E46] rounded-md border-none pr-12 p-2 w-full"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                             value={password}
                             required
