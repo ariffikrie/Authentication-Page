@@ -36,59 +36,62 @@ const Form: React.FC = () => {
     };
 
     return (
-        <div className="bg-[#222831] h-screen mx-auto">
-            <h1 className='text-center text-4xl text-[#9fafca] hover:text-[#b8df10] font-extrabold pt-10 pb-10'>
-                Sign In Form
-            </h1>
-            {error ? (
-                <div className="text-red-500 text-center mb-4">{error}</div>
-            ) : (
-                ''
-            )}
-            <form className="max-w-sm mx-auto w-full" onSubmit={handleSubmit}>
-                <div className="flex flex-col pt-10">
-                    <label htmlFor="email" className="pb-3 text-white">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="bg-[#393E46] border-none mb-3 rounded-md p-2"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                        value={email}
-                        required
-                    />
-
-                    <label htmlFor="password" className="pb-3 text-white">Password</label>
-                    <div className="relative">
+        <div className="flex w-half h-full bg-[#27374D]">
+            <div className="bg-[#fdfaf6b1] h-screen mx-auto w-11/12 rounded-2xl shadow-2xl">
+                <h1 className='text-center text-4xl text-[#222324] hover:text-[#3F7D58] font-extrabold pt-50'>
+                    Member Login
+                </h1>
+                {error ? (
+                    <div className="text-red-500 text-center mb-4">{error}</div>
+                ) : (
+                    ''
+                )}
+                <form className="max-w-sm mx-auto w-full" onSubmit={handleSubmit}>
+                    <div className="flex flex-col pt-10">
+                        <label htmlFor="email" className="pb-3 text-black text-lg text-left">Username</label>
                         <input
-                            type={showPassword ? "text" : "password"}
-                            id="password"
-                            className="bg-[#393E46] rounded-md border-none pr-12 p-2 w-full"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                            value={password}
+                            type="email"
+                            id="email"
+                            className="bg-[#EAEAEA] border-none border-2 mb-3 rounded-xl text-black p-2"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                            value={email}
                             required
                         />
+
+                        <label htmlFor="password" className="pb-3 text-black text-lg text-left">Password</label>
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                className="bg-[#EAEAEA] rounded-xl border-none text-black pr-12 p-2 w-full"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                                value={password}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 pr-2 flex items-center"
+                                onClick={toggleShowPassword}
+                            >
+                                {showPassword ? (
+                                    <i className="fas fa-eye-slash fa-lg text-black"></i>
+                                ) : (
+                                    <i className="fas fa-eye fa-lg text-black"></i>
+                                )}
+                            </button>
+                        </div>
+
                         <button
-                            type="button"
-                            className="absolute inset-y-0 right-0 pr-2 flex items-center"
-                            onClick={toggleShowPassword}
+                            type="submit"
+                            className="rounded-full text-lg leading-4 font-medium bg-[#3F72AF] hover:bg-[#3F7D58] h-10 mt-5 text-white"
                         >
-                            {showPassword ? (
-                                <i className="fas fa-eye-slash fa-lg"></i>
-                            ) : (
-                                <i className="fas fa-eye fa-lg"></i>
-                            )}
+                            Sign In
                         </button>
                     </div>
-
-                    <button
-                        type="submit"
-                        className="rounded-full text-lg leading-4 font-medium bg-blue-500 hover:bg-sky-700 h-8 mt-5 text-white"
-                    >
-                        Sign In
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+
     );
 };
 
