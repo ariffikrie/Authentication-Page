@@ -37,14 +37,14 @@ const Form: React.FC = () => {
 
     return (
         <div className="flex w-half h-full bg-[#27374D]">
-            <div className="bg-[#fdfaf6b1] h-screen mx-auto w-11/12 rounded-2xl shadow-2xl">
-                <div className="flex flex-col items-center pt-30">
+            <div className="bg-[#fdfaf6b1] m-15 h-150 mx-auto w-150 rounded-2xl shadow-lg shadow-black">
+                <div className="flex flex-col items-center pt-20">
                     <img
                         src="./src/assets/maf-high-resolution-logo.png"
                         alt="Login Logo"
                         className=" rounded-2xl w-24 h-24 mb-4"
                     />
-                    <h1 className='text-center text-4xl text-[#222324] hover:text-[#3F7D58] font-extrabold'>
+                    <h1 className='text-center text-3xl text-[#222324] hover:text-[#3F7D58] font-extrabold'>
                         Member Login
                     </h1>
                 </div>
@@ -55,7 +55,7 @@ const Form: React.FC = () => {
                 )}
                 <form className="max-w-sm mx-auto w-full" onSubmit={handleSubmit}>
                     <div className="flex flex-col pt-10">
-                        <label htmlFor="email" className="pb-3 text-black text-lg text-left">Username</label>
+                        <label htmlFor="email" className="pl-2 pb-3 text-black text-lg text-left">Username</label>
                         <input
                             type="email"
                             id="email"
@@ -65,7 +65,7 @@ const Form: React.FC = () => {
                             required
                         />
 
-                        <label htmlFor="password" className="pb-3 text-black text-lg text-left">Password</label>
+                        <label htmlFor="password" className="pl-2 pb-3 text-black text-lg text-left">Password</label>
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
