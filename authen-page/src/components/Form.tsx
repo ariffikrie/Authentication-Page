@@ -38,9 +38,16 @@ const Form: React.FC = () => {
     return (
         <div className="flex w-half h-full bg-[#27374D]">
             <div className="bg-[#fdfaf6b1] h-screen mx-auto w-11/12 rounded-2xl shadow-2xl">
-                <h1 className='text-center text-4xl text-[#222324] hover:text-[#3F7D58] font-extrabold pt-50'>
-                    Member Login
-                </h1>
+                <div className="flex flex-col items-center pt-30">
+                    <img
+                        src="./src/assets/maf-high-resolution-logo.png"
+                        alt="Login Logo"
+                        className=" rounded-2xl w-24 h-24 mb-4"
+                    />
+                    <h1 className='text-center text-4xl text-[#222324] hover:text-[#3F7D58] font-extrabold'>
+                        Member Login
+                    </h1>
+                </div>
                 {error ? (
                     <div className="text-red-500 text-center mb-4">{error}</div>
                 ) : (
