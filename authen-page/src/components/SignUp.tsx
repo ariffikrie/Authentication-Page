@@ -1,34 +1,41 @@
 import React, { useState } from "react";
 import axios, { AxiosError } from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 interface ErrorResponse {
     message: string;
 }
 
-const Form: React.FC = () => {
+const SignUp: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const navigate = useNavigate(); // Initialize the navigate function
+    const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         setError("");
-        alert("You are Signed In");
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
 
         try {
-            await axios.post(`http://localhost:5173/api/signin`, {
+            await axios.post(`http://localhost:5173/api/signup`, {
                 email,
                 password
             });
+            alert("Account created successfully!");
+            // Redirect to sign in page after successful signup
+            window.location.href = "/";
         } catch (e) {
             const error = e as AxiosError<ErrorResponse>;
             if (error.response?.data?.message) {
                 setError(error.response.data.message);
             } else {
-                setError("An error occurred during sign in");
+                setError("An error occurred during sign up");
             }
         }
     };
@@ -37,9 +44,13 @@ const Form: React.FC = () => {
         setShowPassword(!showPassword);
     };
 
-    const handleSignUp = (): void => {
-        // Use the navigate function to redirect to the signup page
-        navigate('/signup');
+    const toggleShowConfirmPassword = (): void => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
+    const handleSignIn = (): void => {
+        // Navigate back to sign in page
+        window.location.href = "/";
     };
 
     return (
@@ -48,11 +59,11 @@ const Form: React.FC = () => {
                 <div className="flex flex-col items-center pt-20">
                     <img
                         src="./src/assets/maf-high-resolution-logo.png"
-                        alt="Login Logo"
-                        className=" rounded-2xl w-24 h-24 mb-4"
+                        alt="SignUp Logo"
+                        className="rounded-2xl w-24 h-24 mb-4"
                     />
                     <h1 className='text-center text-3xl text-[#222324] hover:text-[#3F7D58] font-extrabold'>
-                        Member Login
+                        Create Account
                     </h1>
                 </div>
                 {error ? (
@@ -61,8 +72,8 @@ const Form: React.FC = () => {
                     ''
                 )}
                 <form className="max-w-sm mx-auto w-full" onSubmit={handleSubmit}>
-                    <div className="flex flex-col pt-10">
-                        <label htmlFor="email" className="pl-2 pb-3 text-black text-lg text-left">Username</label>
+                    <div className="flex flex-col pt-5">
+                        <label htmlFor="email" className="pl-2 text-black text-lg text-left">Email</label>
                         <input
                             type="email"
                             id="email"
@@ -72,8 +83,8 @@ const Form: React.FC = () => {
                             required
                         />
 
-                        <label htmlFor="password" className="pl-2 pb-3 text-black text-lg text-left">Password</label>
-                        <div className="relative">
+                        <label htmlFor="password" className="pl-2 text-black text-lg text-left">Password</label>
+                        <div className="relative mb-3">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
@@ -95,29 +106,51 @@ const Form: React.FC = () => {
                             </button>
                         </div>
 
+                        <label htmlFor="confirmPassword" className="pl-2 text-black text-lg text-left">Confirm Password</label>
+                        <div className="relative">
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                id="confirmPassword"
+                                className="bg-[#EAEAEA] rounded-xl border-none text-black pr-12 p-2 w-full"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+                                value={confirmPassword}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-0 pr-2 flex items-center"
+                                onClick={toggleShowConfirmPassword}
+                            >
+                                {showConfirmPassword ? (
+                                    <i className="fas fa-eye-slash fa-lg text-black"></i>
+                                ) : (
+                                    <i className="fas fa-eye fa-lg text-black"></i>
+                                )}
+                            </button>
+                        </div>
+
                         <button
                             type="submit"
-                            className="rounded-full text-lg leading-4 font-medium bg-[#3F72AF] hover:bg-[#3F7D58] h-10 mt-5 text-white"
+                            className="rounded-full text-lg leading-4 font-medium bg-[#3F7D58] hover:bg-[#3F72AF] h-10 mt-5 text-white"
                         >
-                            Sign In
+                            Sign Up
                         </button>
 
                         <div className="flex items-center justify-center gap-2 mt-4 text-center">
-                            <span className="text-gray-600">Don't have an account?</span>
+                            <span className="text-gray-600">Already have an account?</span>
                             <button
                                 type="button"
-                                onClick={handleSignUp}
+                                onClick={handleSignIn}
                                 className="text-[#3F72AF] hover:text-[#3F7D58] font-medium uppercase"
                             >
-                                Sign Up
+                                Sign In
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
     );
 };
 
-export default Form;
+export default SignUp;
